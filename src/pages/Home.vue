@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header />
+    <h1>Reclist</h1>
     <!--<div v-for="data in allData" :key="data.u_id">
       <h1> {{ data.u_lastname }} </h1>
       <p> {{ data.u_firstname }} </p>
