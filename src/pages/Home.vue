@@ -1,23 +1,26 @@
 <template>
   <div id="app">
-    <div v-for="data in allData" :key="data.u_id">
+    <Header />
+    <!--<div v-for="data in allData" :key="data.u_id">
       <h1> {{ data.u_lastname }} </h1>
       <p> {{ data.u_firstname }} </p>
+    <div>-->
+    <div id="table">
+      <b-table striped hover :items="allData"></b-table>
     </div>
-    <button @click="fetchUsers"> Click me!</button>
-    <div v-for="user in users" :key="user.id">
-      <h1> {{ user.name }} </h1>
-      <p> {{ user.email }} </p>
-    </div>
-    <button @click="fetchAllData" variant="success"> Moje data </button>
+    <b-button @click="fetchAllData" variant="success"> Moje data </b-button>
   </div>
 </template>
 
 <script>
+import Header from '@/components/Header'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  components:{
+    Header
   },
   data () {
     return {
@@ -64,5 +67,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.btn {
+  margin: 10px 10px;
 }
 </style>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+import Home from '@/pages/Home'
+import Smartview from '@/pages/Smartview'
 //import PageThreadShow from '@/pages/PageThreadShow'
 
 Vue.use(Router)
@@ -8,7 +9,13 @@ Vue.use(Router)
 export default new Router({
   routes: [
     
-    { path: '/', component: Home },
+    { path: '/', 
+      name: 'home',
+      component: Home,
+     },
+    { path: '/smartview',
+      name: 'Smartview',
+      component: Smartview },
     /* other routes */
     { path: '/api'},
     
