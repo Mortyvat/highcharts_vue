@@ -16,7 +16,7 @@
 <script>
 import Header from '@/components/Header'
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   props: {
     msg: String
   },
@@ -38,7 +38,7 @@ export default {
       })
     },
     fetchAllData:function(){  
-      this.$http.get('https://192.168.0.143/highcharts_vue/highcharts_vue/app/api/action.php')
+      this.$http.get('https://u-briza0r1.pce.retia.cz/highcharts_vue/highcharts_vue/app/api/action.php')
       .then((result) => {
         this.allData = result.data
       })
