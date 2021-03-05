@@ -9,105 +9,42 @@
   </option>
     </select>
     <span>Selected: {{ selected }}</span>
-    <highcharts :options="chartOptions[selected].chartOptions"></highcharts>
+    <div v-if="selected === 'gauge'">
+      <gauge/>
+    </div>
+    <div v-else-if="selected === 'heatmap '">
+      <heatmap/>
+    </div>
+    <div v-else>
+      <solidgauge/>
+    </div>
+
   </div>
 </template>
 
 <script>
-import {Chart} from 'highcharts-vue'
 import Header from '@/components/Header'
-//import { ChartFactory } from '@/Modules/Factory/ChartFactory';
+import Gauge from "@/components/Charts/Gauge";
+import SolidGauge from "@/components/Charts/SolidGauge";
+import HeatMap from "@/components/Charts/HeatMap";
 
 export default {
   name: 'Smartview',
   components:{
     Header,
-    highcharts: Chart 
+    gauge: Gauge,
+    heatmap: HeatMap,
+    solidgauge: SolidGauge
   },
   data() {
     return {
-      selected: 'spline', 
+      selected: 'gauge', 
       selectOptions : [
-        { text: 'SolidGauge', value: 'solidgauge' },
-        { text: 'Sloupce', value: 'bar' },
-        { text: 'Čára', value: 'spline' }
+        { text: 'Gauge', value: 'gauge' },
+        { text: 'HeatMap', value: 'heatmap' },
+        { text: 'SolidGauge', value: 'solidgauge' }
       ],
-      chartOptions: {
-        spline:{
-          chartOptions: {
-            chart: {
-              type: 'spline'
-            },
-            title: {
-              text: 'Sin chart'
-            },
-            series: [{
-              data: [10, 0, 8, 2, 6, 4, 5, 5],
-              color: '#6fcd98'
-          }]
-        }
-      },
-      solidgauge:{
-        chartOptions: {
-          chartType : 'solidgauge',
-          title : "Number of calls",
-          xAxis : "2021-01-16",
-          yAxis : "",
-          series : [{
-              name: 'Total',
-              type: 'solidgauge',
-              data: [{
-                  agname: "dash_records",
-                  color: "#5bc4e5",
-                  innerRadius: "88%",
-                  radius: "112%",
-                  percentage: 100,
-                  total: 46,
-                  y: 46,
-                  dataLabels: {
-                      color: "#5bc4e5",
-                      y : -46
-                  }
-              }]
-            },{
-                name: 'Outgoing',
-                type: 'solidgauge',
-                data: [{
-                    agname: "dash_records",
-                    color: "#bdd002",
-                    innerRadius: "63%",
-                    radius: "87%",
-                    percentage: 69.56521739130434,
-                    total: 46,
-                    y: 32,
-                    dataLabels: {
-                        color: "#bdd002",
-                        y : -12
-                    }
-                }]
-            },{
-                name: 'Incoming',
-                type: 'solidgauge',
-                data: [{
-                    agname: "dash_records",
-                    color: "#e51c1f",
-                    innerRadius: "38%",
-                    radius: "62%",
-                    percentage: 30.434782608695652,
-                    total: 46,
-                    y: 14,
-                    dataLabels: {
-                        color: "#e51c1f",
-                        y : 18
-                    }
-                }]
-            }]
-          }
-        }
-      }
- 
     }
-
   }
 }
 </script>
