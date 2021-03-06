@@ -12,8 +12,11 @@
     <div v-if="selected === 'gauge'">
       <gauge/>
     </div>
-    <div v-else-if="selected === 'heatmap '">
+    <div v-else-if="selected === 'heatmap'">
       <heatmap/>
+    </div>
+    <div v-else-if="selected === 'stackedbar'">
+      <stackedbar/>
     </div>
     <div v-else>
       <solidgauge/>
@@ -27,6 +30,7 @@ import Header from '@/components/Header'
 import Gauge from "@/components/Charts/Gauge";
 import SolidGauge from "@/components/Charts/SolidGauge";
 import HeatMap from "@/components/Charts/HeatMap";
+import StackedBar from "@/components/Charts/StackedBar";
 
 export default {
   name: 'Smartview',
@@ -34,15 +38,17 @@ export default {
     Header,
     gauge: Gauge,
     heatmap: HeatMap,
-    solidgauge: SolidGauge
+    solidgauge: SolidGauge,
+    stackedbar: StackedBar
   },
   data() {
     return {
-      selected: 'gauge', 
+      selected: 'solidgauge', 
       selectOptions : [
         { text: 'Gauge', value: 'gauge' },
         { text: 'HeatMap', value: 'heatmap' },
-        { text: 'SolidGauge', value: 'solidgauge' }
+        { text: 'SolidGauge', value: 'solidgauge' },
+        { text: 'StackedBar', value: 'stackedbar'}
       ],
     }
   }

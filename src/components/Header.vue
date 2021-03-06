@@ -4,6 +4,7 @@
     <b-navbar-nav>
       <b-navbar-brand href="/">Reclist</b-navbar-brand>
       <b-nav-item href="/smartview">Smartview</b-nav-item>
+      <b-nav-item href="/line">LineChart</b-nav-item>
       <!-- Navbar dropdowns -->
     </b-navbar-nav>
   </b-navbar>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <highcharts :options="chartOptions" :callback="chartCallback"></highcharts>
+    <highcharts :options="chartOptions"></highcharts>
   </div>
 </template>
 
@@ -15,8 +15,8 @@ export default {
     highcharts: Chart
   },
   methods: {
-    chartCallback(chart) {
-      if (!chart.renderer.forExport) {
+    /*chartCallback() {
+      /*if (!chart.renderer.forExport) {
         setInterval(function() {
           var point = chart.series[0].points[0],
             newVal,
@@ -29,6 +29,24 @@ export default {
 
           point.update(newVal);
         }, 3000);
+      }
+    }*/
+  },
+  computed:{
+    getValueStr : function(value) {
+      if(value >= 0 && value <= 999){
+          return Highcharts.numberFormat(value,0);
+      //do milionu
+      }else if(value > 999 && value <= 999999){
+          return Highcharts.numberFormat(value/1000, 1)+'K';
+      //od milionu do miliardy
+      }else if(value > 999999 && value <= 999999999){
+          return Highcharts.numberFormat(value/1000000, 1)+'M';
+      //od miliardy vys
+      }else if(value > 999999999 && value <= 999999999999){
+          return Highcharts.numberFormat(value/1000000000, 1)+'G';
+      }else{
+          return '';
       }
     }
   },
@@ -44,7 +62,7 @@ export default {
           dayPoint : "2020-01-16",
           defaultChartType : "AgentCard",
           donut : "false",
-          type : this.chartType,
+          type : 'solidgauge',
           group : "Group",
           //height : "110%",
           intervalSplit : 1,
@@ -58,7 +76,7 @@ export default {
           prevType : "solidgauge",
           reflow : 0,
           stacking : 0,
-          subChart : true
+          subChart : true,
         },
 
         title: {
@@ -83,7 +101,7 @@ export default {
                         fontSize : '16px'
                     },
                     /*formatter : function(){
-                        var value = getValueStr(this.y);
+                        var value = this.getValueStr(this.y);
                         return value;
                     }*/
                 }
@@ -121,16 +139,15 @@ export default {
             }
           ]
         },
-
+        xAxis : {
+          title: "2021-01-16"
+        },
         // the value axis
         yAxis: {
           min : 0,
           max : 500,
           lineWidth : 0,
           tickPositions: [],
-          title: {
-            text: "km/h"
-          },
         },
 
         series : [{

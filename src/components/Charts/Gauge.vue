@@ -1,6 +1,6 @@
 <template>
   <div>
-    <highcharts :options="chartOptions" :callback="chartCallback"></highcharts>
+    <highcharts :options="chartOptions"></highcharts>
   </div>
 </template>
 
@@ -16,7 +16,29 @@ export default {
     highcharts: Chart
   },
   methods: {
-    chartCallback(chart) {
+    setSolidgaugeTooltip(){
+        this.options.tooltip.enabled = true;
+        
+        this.options.tooltip.formatter = function() {
+            return	'<span style=\'font-size:10px\'><b>Šparlinek Marcel</b></span><table>'+
+                    '<tr><td style=\'color:'+this.series.data[0].color+';padding:0\'><b>'+this.point.series.name+'</b></td></tr>'+
+                    '<tr><td style=\'padding:0\'><b>Turn:</b> '+this.series.yAxis.max+'</td></tr>'+
+                    '<tr><td style=\'padding:0\'><b>Count:</b> '+this.y+'</td></tr>'+
+                    '<tr><td style=\'padding:0\'><b>Percent:</b> '+Highcharts.numberFormat(this.percentage, 2)+'%</td></tr>'+
+                    '</table>';
+        };
+        this.options.tooltip.shared = true;
+        this.options.tooltip.useHTML = true;
+        this.options.tooltip.headerFormat = '';
+        this.options.tooltip.pointFormat = '';
+        this.options.tooltip.positioner = function (labelWidth) {
+            return {
+                x: (this.chart.chartWidth - labelWidth) / 2,
+                y: (this.chart.plotHeight / 2) + 105
+            };
+        }
+    }
+    /*chartCallback(chart) {
       if (!chart.renderer.forExport) {
         setInterval(function() {
           var point = chart.series[0].points[0],
@@ -31,7 +53,7 @@ export default {
           point.update(newVal);
         }, 3000);
       }
-    }
+    }*/
   },
   data() {
     return {
